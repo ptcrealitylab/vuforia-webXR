@@ -37,10 +37,9 @@ const char* vuforiaKey = "Replace this string with your license key";
 #endif /* vuforiaKey_h */
 ```
 
-4. When these files are in place, open VuforiaWebXR.xcodeproj. Make sure
-   Xcode is set up with your Apple developer profile for code signing. You should be able to
-   compile and run the project (it won't run on the simulator; you need to have an iOS device
-   connected).
+4. When these files are in place, open VuforiaWebXR.xcodeproj. Navigate to the `Signing & Capabilities`
+view and update the signing credentials with your own. You should now be able to compile and run the project
+(it won't run on the simulator; you need to have an iOS device connected).
    
 ### Use
 
