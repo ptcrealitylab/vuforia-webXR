@@ -41,6 +41,22 @@ const char* vuforiaKey = "Replace this string with your license key";
    Xcode is set up with your Apple developer profile for code signing. You should be able to
    compile and run the project (it won't run on the simulator; you need to have an iOS device
    connected).
+   
+### Use
+
+When you launch the app, firsts allow camera access, and then point your camera at any of these
+three Image Targets to load and render their web content:
+
+**chips** (renders a 2D image)
+
+![chips target](./VuforiaWebXR/resources/ImageTargets/chips.jpg)
+
+**tarmac** (renders the spatialtoolbox.vuforia.com webpage - fully interactive)
+![tarmac target](./VuforiaWebXR/resources/ImageTargets/tarmac.jpg)
+
+**stones** (renders a WebGL icosahedron using three.js)
+![stones target](./VuforiaWebXR/resources/ImageTargets/stones.jpg)
+
 
 ### Device Compatibility
 
