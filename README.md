@@ -44,8 +44,10 @@ const char* vuforiaKey = "Replace this string with your license key";
    
 ### Use
 
-When you launch the app, firsts allow camera access, and then point your camera at any of these
-three Image Targets to load and render their web content:
+When you launch the app, first allow camera access and then point your camera at any of these
+three Image Targets to load and render their web content.
+
+Tap on the background to freeze or resume the camera, or tap on web content to interact with it.
 
 **chips** (renders a 2D image)
 
