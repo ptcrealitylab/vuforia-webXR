@@ -44,8 +44,10 @@ const char* vuforiaKey = "Replace this string with your license key";
    
 ### Use
 
-When you launch the app, first allow camera access and then point your camera at any of these
-three Image Targets to load and render their web content.
+When you launch the app, first allow camera access and then point your camera at any of the following
+three Image Targets to load and render their web content. The result should look like:
+
+![demo](README-resources/demo.gif)
 
 Tap on the background to freeze or resume the camera, or tap on web content to interact with it.
 
@@ -69,6 +71,7 @@ To add a new Image Target with some corresponding changes, there are two changes
    Call `toolbox.device.utilities.setupHardcodedObject` with the name of the target (matching the
    name as it appears in the XML file), and a path to the webpage to be rendered at that target's location.
    
+
 This can either be a local HTML file, such as those in the `bin/data/userinterface/content` directory,
 or a path to a webpage hosted elsewhere, such as the spatialtoolbox.vuforia.com webpage.
 
