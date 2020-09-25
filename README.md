@@ -57,6 +57,26 @@ three Image Targets to load and render their web content:
 **stones** (renders a WebGL icosahedron using three.js)
 ![stones target](./VuforiaWebXR/resources/ImageTargets/stones.jpg)
 
+### Adding Targets and Content
+
+To add a new Image Target with some corresponding changes, there are two changes to make:
+
+1. Add the XML and DAT files for that target to the `VuforiaWebXR/resources/ImageTargets` directory.
+2. In `VuforiaWebXR/ARManager.mm`, edit the implementation of `addDefaultMarkers` to add your target.
+3. In `bin/data/userinterface/src/device/onLoad.js`, edit the implementation of the `onload` function.
+   Call `toolbox.device.utilities.setupHardcodedObject` with the name of the target (matching the
+   name as it appears in the XML file), and a path to the webpage to be rendered at that target's location.
+   
+This can either be a local HTML file, such as those in the `bin/data/userinterface/content` directory,
+or a path to a webpage hosted elsewhere, such as the spatialtoolbox.vuforia.com webpage.
+
+```
+toolbox.device.utilities.setupHardcodedObject('chips', 'default', 'content/chips/index.html');
+toolbox.device.utilities.setupHardcodedObject('tarmac', 'default', 'https://spatialtoolbox.vuforia.com', 800, 600);
+```
+
+The size of the content window can be optionally specified, otherwise it will be inferred from the page contents.
+
 
 ### Device Compatibility
 
