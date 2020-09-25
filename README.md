@@ -62,7 +62,7 @@ Tap on the background to freeze or resume the camera, or tap on web content to i
 
 ### Adding Targets and Content
 
-To add a new Image Target with some corresponding changes, there are two changes to make:
+To add a new Image Target with some corresponding content, there are two changes to make:
 
 1. Add the XML and DAT files for that target to the `VuforiaWebXR/resources/ImageTargets` directory.
 2. In `VuforiaWebXR/ARManager.mm`, edit the implementation of `addDefaultMarkers` to add your target.
