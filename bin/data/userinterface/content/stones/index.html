@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>three.js Spatial Toolbox Example</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+<body>
+<!-- 1. Import the three.js library -->
+<script src="../_contentLibraries/object.js"></script>
+<script src="../_contentLibraries/three.min.js"></script>
+<script src="utils/SceneUtils.js"></script>
+
+<script>
+  // 2. set up some variables for the three.js scene
+  let camera, scene, renderer;
+  let containerObj;
+  let mesh;
+  let rendererWidth = screen.height; // width is height because landscape orientation
+  let rendererHeight = screen.width; // height is width
+  let isProjectionMatrixSet = false;
+
+  // 3. Initialize the Spatial Toolbox API
+  let spatialInterface = new SpatialInterface();
+
+  window.onload = function () {
+    // 4. Initialize the three.js renderer
+    renderer = new THREE.WebGLRenderer({alpha: true});
+    renderer.setPixelRatio(window.devicePixelRatio);
+    renderer.setSize(rendererWidth, rendererHeight);
+    document.body.appendChild(renderer.domElement);
+
+    // 5. Initialize the three.js scene with a camera, contents, and lighting
+    camera = new THREE.PerspectiveCamera(70, rendererWidth / rendererHeight, 1, 1000);
+    scene = new THREE.Scene();
+    containerObj = new THREE.Object3D();
+    containerObj.matrixAutoUpdate = false;
+    scene.add(containerObj);
+
+    // 6. Add some content to the scene's container object - customize this!
+
+    // add an icosahedron 3d model to the container object 
+    var radius = 75;
+    var geometry = new THREE.IcosahedronGeometry( radius, 1 );
+    var materials = [
+      new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading, vertexColors: THREE.VertexColors, shininess: 0 } ),
+      new THREE.MeshBasicMaterial( { color: 0x000000, shading: THREE.FlatShading, wireframe: true, transparent: true } )
+    ];
+    mesh = THREE.SceneUtils.createMultiMaterialObject( geometry, materials );
+    containerObj.add( mesh );
+    mesh.position.setZ(150);
+    mesh.children[0].material.color.setHSL( 0, 0.75, 0.6 );
+
+    // light the scene with a combination of ambient and directional white light
+    var ambLight = new THREE.AmbientLight(0x404040);
+    scene.add(ambLight);
+    var dirLight1 = new THREE.DirectionalLight(0xffffff, 1);
+    dirLight1.position.set(100, 100, 100);
+    scene.add(dirLight1);
+    var dirLight2 = new THREE.DirectionalLight(0xffffff, 0.5);
+    dirLight2.position.set(-100, -100, -100);
+    scene.add(dirLight2);
+
+    // 7. Use the Spatial Toolbox APIs to prepare to render correctly
+    spatialInterface.setFullScreenOn();
+    spatialInterface.addMatrixListener(receiveMatrices);
+    
+    // renderScene();
+  };
+
+  // 8. This main rendering loop will get called 60 times per second
+  function receiveMatrices(modelViewMatrix, projectionMatrix) {
+
+    // 9. only set the projection matrix for the camera 1 time, since it stays the same
+    if (!isProjectionMatrixSet && projectionMatrix.length > 0) {
+      setMatrixFromArray(camera.projectionMatrix, projectionMatrix);
+      isProjectionMatrixSet = true;
+    }
+
+    // 10. Every frame, set the position of the containerObj to the modelViewMatrix
+    if (isProjectionMatrixSet) {
+      setMatrixFromArray(containerObj.matrix, modelViewMatrix);
+      mesh.rotation.z += 0.01; // make it spin
+      renderer.render(scene, camera);
+    }
+  }
+  
+  // function renderScene() {
+  //   if (isProjectionMatrixSet) {
+  //     mesh.rotation.z += 0.01; // make it spin
+  //     renderer.render(scene, camera);
+  //   }
+  //  
+  //   requestAnimationFrame(renderScene);
+  // }
+
+  // 11. This is just a helper function to set a three.js matrix using an array
+  function setMatrixFromArray(matrix, array) {
+    matrix.set( array[0], array[4], array[8], array[12],
+    array[1], array[5], array[9], array[13],
+    array[2], array[6], array[10], array[14],
+    array[3], array[7], array[11], array[15]);
+  }
+
+  // 12. Make sure the 3d renderer always has the right aspect ratio of the screen
+  window.addEventListener('resize', function() {
+    rendererWidth = window.innerWidth;
+    rendererHeight = window.innerHeight;
+
+    if (camera) {
+      camera.aspect = rendererWidth / rendererHeight;
+      // camera.updateProjectionMatrix();
+    }
+
+    if (renderer) {
+      renderer.setSize(rendererWidth, rendererHeight);
+    }
+  });
+</script>
+</body>
+</html>
