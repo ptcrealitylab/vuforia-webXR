@@ -81,6 +81,11 @@ toolbox.device.utilities.setupHardcodedObject('tarmac', 'default', 'https://spat
 
 The size of the content window can be optionally specified, otherwise it will be inferred from the page contents.
 
+2D content can be rendered with no modifications (see the `content/chips` example). This includes embedded images,
+videos, interactive HTML widgets, etc.
+
+To learn how to adapt Three.js WebGL content to be compatible with this rendering method, you can read an
+explanation of the `content/stones` source code here: https://spatialtoolbox.vuforia.com/docs/tutorials/three-js-tool-tutorial
 
 ### Device Compatibility
 
