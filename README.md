@@ -81,17 +81,23 @@ toolbox.device.utilities.setupHardcodedObject('tarmac', 'default', 'https://spat
 
 The size of the content window can be optionally specified, otherwise it will be inferred from the page contents.
 
-2D content can be rendered with no modifications (see the `content/chips` example). This includes embedded images,
-videos, interactive HTML widgets, etc.
+2D content can be rendered with no modifications (see the
+[chips example](https://github.com/ptcrealitylab/vuforia-webXR/tree/master/bin/data/userinterface/content/chips)).
+Similarly, you can render text, images, videos, interactive HTML widgets, etc, as if you were writing a standard web page.
 
 To learn how to adapt Three.js WebGL content to be compatible with this rendering method, you can read an
-explanation of the `content/stones` source code here: https://spatialtoolbox.vuforia.com/docs/tutorials/three-js-tool-tutorial
+explanation of the
+[stones example](https://github.com/ptcrealitylab/vuforia-webXR/tree/master/bin/data/userinterface/content/stones)
+source code here: https://spatialtoolbox.vuforia.com/docs/tutorials/three-js-tool-tutorial
 
 ### Device Compatibility
 
 The device compatibility should mirror the Vuforia Spatial Toolbox. This has been developed
 and tested primarily with iOS 14 and with device models iPhone 6S and iPhone 8 Plus, and was also
 tested with an iPad Pro, but should work with all recent iPhone models.
+
+Extending compatibility to Android is entirely feasible, based on the Android port of Vuforia Spatial Toolbox
+(currently in late stages of development).
 
 ### Notes
 
